@@ -1,16 +1,24 @@
-FROM continuumio/miniconda3:4.9.2
-LABEL authors="Anthony Underwood" \
-      description="Docker image PopPUNK2"
+FROM continuumio/miniconda3:4.9.2 as base
 
 COPY environment.yml /
+
 RUN conda env create -f environment.yml && conda clean -a
 
-COPY ref/ /ref/
-COPY gpsc_clusters.csv /
+FROM base
+
+ARG LIBRARY=vibriowatch
+
+LABEL authors="Anthony Underwood & Corin Yeats" \
+      description="Docker image PopPUNK2"
+
+COPY ${LIBRARY}_db/ /${LIBRARY}_db/
+# COPY gpsc_clusters.csv /
 COPY sample.txt /
 COPY result2json.py /
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENV LIB=${LIBRARY}
+
+ENTRYPOINT /entrypoint.sh ${LIB}
