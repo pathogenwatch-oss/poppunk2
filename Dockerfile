@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:4.9.2 as base
+FROM continuumio/miniconda3:23.10.0-1 as base
 
 COPY environment.yml /
 
