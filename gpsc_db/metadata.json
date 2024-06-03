@@ -2,5 +2,8 @@
   "email": "gps@pneumogen.net",
   "label": "GPSC",
   "source": "The Global Pneumococcal Sequencing Project",
-  "url": "https://www.pneumogen.net/gps/"
+  "url": "https://www.pneumogen.net/gps/",
+  "versions": {
+    "scheme": "v8"
+  }
 }
